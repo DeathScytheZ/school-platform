@@ -1,0 +1,20 @@
+const mysql = require('mysql2/promise');
+
+const schoolDb = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'school'
+});
+
+const govDB = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'gov'
+});
+
+module.exports = {
+    schoolDb,
+    govDB
+};

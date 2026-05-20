@@ -1,0 +1,31 @@
+{
+    "name": "school-platform",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "private": true,
+    "workspaces": [
+        "apps/*"
+    ],
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev:frontend": "npm run dev -w apps/frontend",
+        "dev:backend": "npm run dev -w apps/backend",
+        "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DeathScytheZ/school-platform.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "commonjs",
+    "bugs": {
+        "url": "https://github.com/DeathScytheZ/school-platform/issues"
+    },
+    "homepage": "https://github.com/DeathScytheZ/school-platform#readme",
+    "devDependencies": {
+        "concurrently": "^9.2.1"
+    }
+}

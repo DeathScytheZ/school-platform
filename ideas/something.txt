@@ -1,0 +1,11 @@
+signup
+login
+approve/reject request
+view account list (system admin)
+view student list (teacher)
+upload homework (teacher)
+view homework (student)
+upload time table (admin)
+view time table (student)
+add announcement (system admin)
+
