@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 
 const RegistrationRequestStatus = Object.freeze({
     PENDING: 'pending',
+    GOV_VERIFIED: 'gov_verified',
+    GOV_REJECTED: 'gov_rejected',
     ACCEPTED: 'accepted',
     REJECTED: 'rejected'
 });

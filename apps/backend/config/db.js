@@ -7,7 +7,7 @@ const schoolDb = mysql.createPool({
     database: 'school'
 });
 
-const govDB = mysql.createPool({
+const govDb = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: '',
@@ -16,5 +16,5 @@ const govDB = mysql.createPool({
 
 module.exports = {
     schoolDb,
-    govDB
+    govDb
 };

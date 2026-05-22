@@ -6,6 +6,7 @@ const {Account, AccountStatus} = require('../models/Account')
 const User = require('../models/User');
 const Teacher = require('../models/Teacher');
 const Staff = require('../models/Staff');
+const GovOfficial = require('../models/GovOfficial');
 
 const signup = async (req, res) => {
     const {officialId, password, firstName, lastName, dateOfBirth, role, roleDetail} = req.body;
@@ -15,7 +16,9 @@ const signup = async (req, res) => {
             message: 'All credentials are required',
         
         });
-    } else if(password.length < 8) {
+    }
+
+    if(password.length < 8) {
         return res.status(400).json({
             success: false,
             message: 'password must be at least 8 characters long'
@@ -24,19 +27,21 @@ const signup = async (req, res) => {
 
     try {
         const registrationRequest = await RegistrationRequest.createRegistrationRequest(
-            officialId,
-            password,
-            firstName,
-            lastName,
-            dateOfBirth,
-            role,
-            roleDetail
+            officialId, password, firstName, lastName, dateOfBirth, role, roleDetail
         );
+
+        const requestId = registrationRequest.insertId;
+
+        const isVerified = await GovOfficial.verify(officialId, firstName, lastName, dateOfBirth, role);
+
+        const newStatus = isVerified ? RegistrationRequestStatus.GOV_VERIFIED : RegistrationRequestStatus.GOV_REJECTED;
+
+        await RegistrationRequest.updateStatus(requestId, newStatus);
 
         res.status(201).json({
             success: true,
-            message: 'User successfully added to database',
-            insertId: registrationRequest.id
+            message: 'Registration request successfully added to database',
+            insertId: registrationRequest.insertId
         });
 
     } catch(error) {
