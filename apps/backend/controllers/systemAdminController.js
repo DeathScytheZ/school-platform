@@ -1,21 +1,14 @@
 const {RegistrationRequest} = require('../models/RegistrationRequest');
+const User = require('../models/User');
 
-const getUserList = async (req, res) =>  {
+const getRequestList = async (req, res) =>  {
     try {
         const registrationRequests = await RegistrationRequest.getRegistrationRequestList();
-        if(registrationRequests.length === 0) {
-            return res.status(200).json({
-                success: true,
-                message: 'No requests available right now',
-                requests: []
-            });
-        }
         res.status(200).json({
             success: true,
             message: 'List of available registration requests',
             requests: registrationRequests
         });
-
     } catch(error) {
         console.error('Database error', error);
         res.status(500).json({
@@ -25,4 +18,14 @@ const getUserList = async (req, res) =>  {
     }
 }
 
-module.exports = getUserList;
+const getUserList = async (req, res) => {
+    try {
+        const users = await User.getAllUsers();
+        res.status(200).json({ success: true, users });
+    } catch(error) {
+        console.error('Database error', error);
+        res.status(500).json({ success: false, message: 'Failed to get users' });
+    }
+}
+
+module.exports = { getRequestList, getUserList };

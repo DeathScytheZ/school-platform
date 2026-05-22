@@ -8,10 +8,10 @@ export const load = async ({ cookies }) => {
 export const actions = {
 	login: async ({ request, cookies }) => {
 		const formData = await request.formData();
-        const payload = {
-            offiicialId: formData.get('officialId'),
-            passowrd: formData.get('password')
-        }
+		const payload = {
+			officialId: formData.get('officialId'),
+			password: formData.get('password')
+		};
 		try {
 			const response = await fetch('http://localhost:3000/api/auth/login', {
 				method: 'POST',
@@ -22,7 +22,7 @@ export const actions = {
 			const result = await response.json();
 			if (!response.ok) {
 				console.error(result.message);
-				return fail(response.status, { error: result.message, officialId: payload.offiicialId });
+				return fail(response.status, { error: result.message, officialId: payload.officialId });
 			}
 
 			cookies.set('token', result.token, {
@@ -32,10 +32,14 @@ export const actions = {
 				sameSite: 'lax',
 				maxAge: 7 * 24 * 60 * 60
 			});
-		} catch (error) {
-			console.error('server error', error); return fail(500, { error: 'Internal server error', officialId: payload.offiicialId }); }
 
-		throw redirect(303, '/teacher-dashboard');
+			const destination = result.role === 'teacher' ? '/teacher-dashboard' : '/staff-dashboard';
+			throw redirect(303, destination);
+		} catch (error) {
+			if (error.status === 303) throw error;
+			console.error('server error', error);
+			return fail(500, { error: 'Internal server error', officialId: payload.officialId });
+		}
 	},
 
 	signup: async ({ request, cookies }) => {
@@ -49,6 +53,8 @@ export const actions = {
 			firstName: formData.get('firstName'),
 			lastName: formData.get('lastName'),
 			dateOfBirth: formData.get('dateOfBirth'),
+			phone: formData.get('phone'),
+			email: formData.get('email'),
 			role: role,
 			roleDetail: role === 'teacher' ? subject : position
 		};

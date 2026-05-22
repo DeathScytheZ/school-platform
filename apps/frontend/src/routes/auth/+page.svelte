@@ -85,6 +85,16 @@
 				<input name="dateOfBirth" type="date" id="dateOfBirth" />
 			</div>
 
+			<div class="phone-container">
+				<label for="phone"> phone number: </label>
+				<input name="phone" type="tel" placeholder="ex: 0512345678" id="phone" />
+			</div>
+
+			<div class="email-container">
+				<label for="email"> email: </label>
+				<input name="email" type="email" placeholder="ex: name@example.com" id="email" />
+			</div>
+
 			<div class="role-container">
 				<label for="role"> role: </label>
 				<select name="role" id="role" bind:value={role}>

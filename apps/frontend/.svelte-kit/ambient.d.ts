@@ -38,6 +38,8 @@
  * The above values will be the same _even if_ different values for `ENVIRONMENT` or `PUBLIC_BASE_URL` are set at runtime, as they are statically replaced in your code with their build time values.
  */
 declare module '$env/static/private' {
+	export const JWT_SECRET: string;
+	export const DATABASE_URL: string;
 	export const SHELL: string;
 	export const npm_command: string;
 	export const npm_config_userconfig: string;
@@ -48,6 +50,7 @@ declare module '$env/static/private' {
 	export const XDG_BACKEND: string;
 	export const _P9K_TTY: string;
 	export const NODE: string;
+	export const ANTHROPIC_API_KEY: string;
 	export const P9K_TTY: string;
 	export const GEMINI_API_KEY: string;
 	export const MEMORY_PRESSURE_WRITE: string;
@@ -201,6 +204,8 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
+		JWT_SECRET: string;
+		DATABASE_URL: string;
 		SHELL: string;
 		npm_command: string;
 		npm_config_userconfig: string;
@@ -211,6 +216,7 @@ declare module '$env/dynamic/private' {
 		XDG_BACKEND: string;
 		_P9K_TTY: string;
 		NODE: string;
+		ANTHROPIC_API_KEY: string;
 		P9K_TTY: string;
 		GEMINI_API_KEY: string;
 		MEMORY_PRESSURE_WRITE: string;

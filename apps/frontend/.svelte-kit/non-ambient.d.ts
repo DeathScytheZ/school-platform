@@ -29,17 +29,20 @@ declare module "$app/types" {
 	type MatcherParam<M> = M extends (param : string) => param is (infer U extends string) ? U : string;
 
 	export interface AppTypes {
-		RouteId(): "/" | "/auth" | "/system-admin-dashboard" | "/teacher-dashboard";
+		RouteId(): "/" | "/auth" | "/staff-dashboard" | "/system-admin-dashboard" | "/system-admin-dashboard/registration-requests" | "/system-admin-dashboard/users" | "/teacher-dashboard";
 		RouteParams(): {
 			
 		};
 		LayoutParams(): {
 			"/": Record<string, never>;
 			"/auth": Record<string, never>;
+			"/staff-dashboard": Record<string, never>;
 			"/system-admin-dashboard": Record<string, never>;
+			"/system-admin-dashboard/registration-requests": Record<string, never>;
+			"/system-admin-dashboard/users": Record<string, never>;
 			"/teacher-dashboard": Record<string, never>
 		};
-		Pathname(): "/" | "/auth" | "/system-admin-dashboard" | "/teacher-dashboard";
+		Pathname(): "/" | "/auth" | "/staff-dashboard" | "/system-admin-dashboard" | "/system-admin-dashboard/registration-requests" | "/system-admin-dashboard/users" | "/teacher-dashboard";
 		ResolvedPathname(): `${"" | `/${string}`}${ReturnType<AppTypes['Pathname']>}`;
 		Asset(): "/agnes-tachyon-uma-musume.gif" | "/favicon.svg" | "/robots.txt" | "/uma-musume-meep.gif" | string & {};
 	}

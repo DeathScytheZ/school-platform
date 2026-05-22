@@ -26,12 +26,13 @@ export const actions = {
                 maxAge: 7 * 24 * 60 * 60
             });
 
+            const destination = result.role === 'teacher' ? '/teacher-dashboard' : '/staff-dashboard';
+            throw redirect(303, destination);
         } catch(error) {
-            console.error('server error', error);  
+            if (error.status === 303) throw error;
+            console.error('server error', error);
             return fail(500, {error: 'Internal server error', officialId});
         }
-
-        throw redirect(303, '/teacher-dashboard');
 
     } 
 }

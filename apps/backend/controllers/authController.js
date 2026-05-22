@@ -9,8 +9,8 @@ const Staff = require('../models/Staff');
 const GovOfficial = require('../models/GovOfficial');
 
 const signup = async (req, res) => {
-    const {officialId, password, firstName, lastName, dateOfBirth, role, roleDetail} = req.body;
-    if(!officialId || !password || !firstName || !lastName || !dateOfBirth || !role || !roleDetail) {
+    const {officialId, password, firstName, lastName, dateOfBirth, phone, email, role, roleDetail} = req.body;
+    if(!officialId || !password || !firstName || !lastName || !dateOfBirth || !phone || !email || !role || !roleDetail) {
         return res.status(400).json({
             success: false,
             message: 'All credentials are required',
@@ -27,7 +27,7 @@ const signup = async (req, res) => {
 
     try {
         const registrationRequest = await RegistrationRequest.createRegistrationRequest(
-            officialId, password, firstName, lastName, dateOfBirth, role, roleDetail
+            officialId, password, firstName, lastName, dateOfBirth, phone, email, role, roleDetail
         );
 
         const requestId = registrationRequest.insertId;
@@ -80,6 +80,8 @@ const addUser = async(req, res) => {
             registrationRequest.first_name,
             registrationRequest.last_name,
             registrationRequest.date_of_birth,
+            registrationRequest.phone,
+            registrationRequest.email,
             connection
         );
 
@@ -178,7 +180,8 @@ const login = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            token: token
+            token: token,
+            role: account.role
         });
 
     } catch(error) {
