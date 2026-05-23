@@ -1,0 +1,36 @@
+import { fail, redirect } from "@sveltejs/kit";
+const actions = {
+  login: async ({ request, cookies }) => {
+    const formData = await request.formData();
+    const officialId = formData.get("officialId");
+    const password = formData.get("password");
+    try {
+      const response = await fetch("http://localhost:3000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ officialId, password })
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        console.error(result.message);
+        return fail(response.status, { error: result.message, officialId });
+      }
+      cookies.set("token", result.token, {
+        path: "/",
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax",
+        maxAge: 7 * 24 * 60 * 60
+      });
+      const destination = result.role === "teacher" ? "/teacher-dashboard" : "/staff-dashboard";
+      throw redirect(303, destination);
+    } catch (error) {
+      if (error.status === 303) throw error;
+      console.error("server error", error);
+      return fail(500, { error: "Internal server error", officialId });
+    }
+  }
+};
+export {
+  actions
+};

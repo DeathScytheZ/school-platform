@@ -1,0 +1,1 @@
+import"../chunks/DsnmJJEf.js";import{a as o,f as t}from"../chunks/CE5cqHET.js";var n=t('<div class="main-container"><div class="student-list-container"></div></div>');function d(a){var i=n();o(a,i)}export{d as component};

@@ -22,6 +22,24 @@
             </div>
             <span class="card-arrow">→</span>
         </a>
+
+        <a href="/system-admin-dashboard/add-child" class="card">
+            <div class="card-icon">🧒</div>
+            <div class="card-body">
+                <h2>Add Child</h2>
+                <p>Register a new child into the system with their details.</p>
+            </div>
+            <span class="card-arrow">→</span>
+        </a>
+
+        <a href="/system-admin-dashboard/add-parent" class="card">
+            <div class="card-icon">👨‍👩‍👧</div>
+            <div class="card-body">
+                <h2>Add Parent</h2>
+                <p>Register a new parent and link them to their children.</p>
+            </div>
+            <span class="card-arrow">→</span>
+        </a>
     </div>
 </div>
 
@@ -127,4 +145,5 @@
         white-space: nowrap;
         flex-shrink: 0;
     }
+
 </style>

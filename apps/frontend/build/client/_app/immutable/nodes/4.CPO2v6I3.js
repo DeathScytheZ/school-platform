@@ -1,0 +1,1 @@
+import"../chunks/DsnmJJEf.js";import{a as n,f as a,n as r}from"../chunks/CE5cqHET.js";var p=a("<button>SignUp</button> <button>login</button>",1);function f(o){console.log();var t=p();r(2),n(o,t)}export{f as component};
