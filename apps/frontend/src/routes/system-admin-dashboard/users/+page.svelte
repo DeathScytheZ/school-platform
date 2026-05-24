@@ -1,5 +1,9 @@
 <script>
     import { onMount } from "svelte";
+    import AppHeader from '$lib/components/AppHeader.svelte';
+    import AppFooter from '$lib/components/AppFooter.svelte';
+
+    let { data } = $props();
 
     let allUsers = $state([]);
     let loading = $state(true);
@@ -35,10 +39,14 @@
 </script>
 
 <div class="page">
-    <header>
-        <a href="/system-admin-dashboard" class="back-link">← Dashboard</a>
-        <h1>Users</h1>
-    </header>
+    <AppHeader
+        profile={data.profile}
+        eyebrow="Administration"
+        title="Users"
+        subtitle="Browse and filter registered teacher and staff accounts."
+        backHref="/system-admin-dashboard"
+        backLabel="← Dashboard"
+    />
 
     <div class="filters">
         <input
@@ -103,14 +111,19 @@
             </table>
         </div>
     {/if}
+
+    <AppFooter profile={data.profile} context="User directory" />
 </div>
 
 <style>
     :global(html, body) {
-        margin: 0; padding: 0;
-        background: #0f1117;
-        color: #e2e8f0;
-        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 0;
+        background:
+            radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.9), transparent 28%),
+            linear-gradient(135deg, #f2f4f7 0%, #d8dde7 100%);
+        color: #101424;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         min-height: 100dvh;
     }
 
@@ -119,28 +132,6 @@
         margin: 0 auto;
         padding: 2rem;
     }
-
-    header {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        margin-bottom: 2rem;
-    }
-
-    h1 {
-        font-size: 1.6rem;
-        font-weight: 600;
-        color: #f1f5f9;
-        margin: 0;
-    }
-
-    .back-link {
-        color: #94a3b8;
-        text-decoration: none;
-        font-size: 0.9rem;
-        transition: color 0.2s;
-    }
-    .back-link:hover { color: #e2e8f0; }
 
     .filters {
         display: flex;
@@ -151,24 +142,27 @@
     }
 
     .filter-input {
-        background: #1e293b;
-        border: 1px solid #334155;
-        border-radius: 8px;
-        color: #e2e8f0;
+        background: #ffffff;
+        border: 1px solid #d9deea;
+        border-radius: 4px;
+        color: #101424;
         padding: 0.5rem 0.9rem;
         font-size: 0.875rem;
         outline: none;
         transition: border-color 0.2s;
         width: 220px;
     }
-    .filter-input:focus { border-color: #4f6a9a; }
-    .filter-input::placeholder { color: #475569; }
+    .filter-input:focus {
+        border-color: #3345ff;
+        box-shadow: 0 0 0 4px rgba(51, 69, 255, 0.11);
+    }
+    .filter-input::placeholder { color: #a2a8b8; }
 
     .role-tabs {
         display: flex;
         gap: 0.4rem;
-        background: #1e293b;
-        border: 1px solid #334155;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid #d9deea;
         border-radius: 8px;
         padding: 4px;
     }
@@ -176,7 +170,7 @@
     .role-tab {
         background: none;
         border: none;
-        color: #64748b;
+        color: #687086;
         padding: 4px 14px;
         border-radius: 6px;
         font-size: 0.825rem;
@@ -185,27 +179,29 @@
         transition: background 0.15s, color 0.15s;
     }
     .role-tab.active {
-        background: #334155;
-        color: #f1f5f9;
+        background: #3345ff;
+        color: #ffffff;
     }
 
     .count {
         font-size: 0.8rem;
-        color: #475569;
+        color: #687086;
         margin: 0 0 0.75rem;
     }
 
     .state-msg {
         text-align: center;
-        color: #64748b;
+        color: #687086;
         margin-top: 4rem;
     }
-    .state-msg.error { color: #f87171; }
+    .state-msg.error { color: #a22929; }
 
     .table-wrapper {
         overflow-x: auto;
-        border-radius: 12px;
-        border: 1px solid #1e293b;
+        border-radius: 8px;
+        border: 1px solid rgba(217, 222, 234, 0.95);
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 24px 70px rgba(22, 28, 45, 0.1);
     }
 
     table {
@@ -214,13 +210,13 @@
         font-size: 0.875rem;
     }
 
-    thead tr { background: #1e293b; }
+    thead tr { background: #f7f8fc; }
 
     th {
         padding: 0.85rem 1rem;
         text-align: left;
         font-weight: 600;
-        color: #94a3b8;
+        color: #687086;
         text-transform: uppercase;
         font-size: 0.75rem;
         letter-spacing: 0.05em;
@@ -228,23 +224,23 @@
     }
 
     tbody tr {
-        border-top: 1px solid #1e293b;
+        border-top: 1px solid #e6eaf2;
         transition: background 0.15s;
     }
-    tbody tr:hover { background: #161c28; }
+    tbody tr:hover { background: #fbfcff; }
 
     td {
         padding: 0.85rem 1rem;
         vertical-align: middle;
-        color: #cbd5e1;
+        color: #242b42;
     }
 
     code {
-        background: #1e293b;
+        background: #eef1ff;
         padding: 2px 6px;
         border-radius: 4px;
         font-size: 0.8rem;
-        color: #7dd3fc;
+        color: #3345ff;
     }
 
     .badge {
@@ -256,6 +252,6 @@
         text-transform: capitalize;
         color: #fff;
     }
-    .badge.teacher { background: #6366f1; }
-    .badge.staff   { background: #0891b2; }
+    .badge.teacher { background: #3345ff; }
+    .badge.staff   { background: #0f8aa6; }
 </style>

@@ -1,4 +1,22 @@
 import { fail } from '@sveltejs/kit';
+import { loadProfile } from '$lib/server/profile';
+
+export const load = async ({ fetch, cookies, locals }) => {
+    const profile = await loadProfile(fetch, cookies, locals);
+
+    try {
+        const response = await fetch('http://localhost:3000/api/system-admin-dashboard/classes');
+        if (!response.ok) {
+            return { classes: [], profile };
+        }
+
+        const result = await response.json();
+        return { classes: result.classes || [], profile };
+    } catch (error) {
+        console.error('Error loading classes:', error);
+        return { classes: [], profile };
+    }
+};
 
 export const actions = {
     createChild: async ({ request }) => {
@@ -10,7 +28,8 @@ export const actions = {
             lastName: formData.get('lastName'),
             dateOfBirth: formData.get('dateOfBirth'),
             level: formData.get('level'),
-            medicalCondition: formData.get('medicalCondition')
+            medicalCondition: formData.get('medicalCondition'),
+            classId: formData.get('classId')
         };
 
         try {

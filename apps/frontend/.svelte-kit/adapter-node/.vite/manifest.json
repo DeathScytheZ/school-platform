@@ -16,13 +16,12 @@
     "src": "../../node_modules/@sveltejs/kit/src/runtime/components/svelte-5/error.svelte",
     "isEntry": true,
     "imports": [
-      "_escaping.js",
+      "_renderer.js",
       "_state.svelte.js",
       "_exports.js",
       "_utils.js",
       "_index.js",
-      "_root.js",
-      "_renderer.js"
+      "_root.js"
     ]
   },
   "../../node_modules/@sveltejs/kit/src/runtime/components/svelte-5/layout.svelte": {
@@ -57,13 +56,23 @@
       "_internal.js"
     ]
   },
+  "_AppFooter.BrdsvKeT.css": {
+    "file": "_app/immutable/assets/AppFooter.BrdsvKeT.css",
+    "src": "_AppFooter.BrdsvKeT.css"
+  },
+  "_AppFooter.js": {
+    "file": "chunks/AppFooter.js",
+    "name": "AppFooter",
+    "imports": [
+      "_renderer.js"
+    ],
+    "css": [
+      "_app/immutable/assets/AppFooter.BrdsvKeT.css"
+    ]
+  },
   "_environment.js": {
     "file": "chunks/environment.js",
     "name": "environment"
-  },
-  "_escaping.js": {
-    "file": "chunks/escaping.js",
-    "name": "escaping"
   },
   "_exports.js": {
     "file": "chunks/exports.js",
@@ -92,6 +101,10 @@
       "src/hooks.server.js"
     ]
   },
+  "_profile.js": {
+    "file": "chunks/profile.js",
+    "name": "profile"
+  },
   "_render-context.js": {
     "file": "chunks/render-context.js",
     "name": "render-context"
@@ -100,8 +113,7 @@
     "file": "chunks/renderer.js",
     "name": "renderer",
     "imports": [
-      "_render-context.js",
-      "_escaping.js"
+      "_render-context.js"
     ]
   },
   "_root.js": {
@@ -144,7 +156,10 @@
     "file": "entries/pages/_page.svelte.js",
     "name": "entries/pages/_page.svelte",
     "src": "src/routes/+page.svelte",
-    "isEntry": true
+    "isEntry": true,
+    "css": [
+      "_app/immutable/assets/_page.Dg9IOnbk.css"
+    ]
   },
   "src/routes/auth/+page.server.js": {
     "file": "entries/pages/auth/_page.server.js",
@@ -158,20 +173,73 @@
     "src": "src/routes/auth/+page.svelte",
     "isEntry": true,
     "imports": [
-      "_escaping.js",
+      "_renderer.js",
       "_exports.js",
       "_utils.js",
       "_root.js",
       "_state.svelte.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.CE8c63As.css"
+      "_app/immutable/assets/_page.BLvwlgNI.css"
+    ]
+  },
+  "src/routes/child-dashboard/+page.server.js": {
+    "file": "entries/pages/child-dashboard/_page.server.js",
+    "name": "entries/pages/child-dashboard/_page.server",
+    "src": "src/routes/child-dashboard/+page.server.js",
+    "isEntry": true,
+    "imports": [
+      "_profile.js"
+    ]
+  },
+  "src/routes/child-dashboard/+page.svelte": {
+    "file": "entries/pages/child-dashboard/_page.svelte.js",
+    "name": "entries/pages/child-dashboard/_page.svelte",
+    "src": "src/routes/child-dashboard/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_renderer.js",
+      "_AppFooter.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.C7JehR7y.css"
+    ]
+  },
+  "src/routes/parent-dashboard/+page.server.js": {
+    "file": "entries/pages/parent-dashboard/_page.server.js",
+    "name": "entries/pages/parent-dashboard/_page.server",
+    "src": "src/routes/parent-dashboard/+page.server.js",
+    "isEntry": true,
+    "imports": [
+      "_profile.js"
+    ]
+  },
+  "src/routes/parent-dashboard/+page.svelte": {
+    "file": "entries/pages/parent-dashboard/_page.svelte.js",
+    "name": "entries/pages/parent-dashboard/_page.svelte",
+    "src": "src/routes/parent-dashboard/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_renderer.js",
+      "_AppFooter.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.BNhCSFWO.css"
     ]
   },
   "src/routes/staff-dashboard/+layout.server.js": {
     "file": "entries/pages/staff-dashboard/_layout.server.js",
     "name": "entries/pages/staff-dashboard/_layout.server",
     "src": "src/routes/staff-dashboard/+layout.server.js",
+    "isEntry": true,
+    "imports": [
+      "_profile.js"
+    ]
+  },
+  "src/routes/staff-dashboard/+page.server.js": {
+    "file": "entries/pages/staff-dashboard/_page.server.js",
+    "name": "entries/pages/staff-dashboard/_page.server",
+    "src": "src/routes/staff-dashboard/+page.server.js",
     "isEntry": true
   },
   "src/routes/staff-dashboard/+page.svelte": {
@@ -180,29 +248,65 @@
     "src": "src/routes/staff-dashboard/+page.svelte",
     "isEntry": true,
     "imports": [
-      "_escaping.js"
+      "_renderer.js",
+      "_AppFooter.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.l2jkcj03.css"
+    ]
+  },
+  "src/routes/staff-dashboard/announcements/+page.server.js": {
+    "file": "entries/pages/staff-dashboard/announcements/_page.server.js",
+    "name": "entries/pages/staff-dashboard/announcements/_page.server",
+    "src": "src/routes/staff-dashboard/announcements/+page.server.js",
+    "isEntry": true
+  },
+  "src/routes/staff-dashboard/announcements/+page.svelte": {
+    "file": "entries/pages/staff-dashboard/announcements/_page.svelte.js",
+    "name": "entries/pages/staff-dashboard/announcements/_page.svelte",
+    "src": "src/routes/staff-dashboard/announcements/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_renderer.js",
+      "_exports.js",
+      "_utils.js",
+      "_root.js",
+      "_state.svelte.js",
+      "_AppFooter.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.omc5GVi1.css"
     ]
   },
   "src/routes/system-admin-dashboard/+page.server.js": {
     "file": "entries/pages/system-admin-dashboard/_page.server.js",
     "name": "entries/pages/system-admin-dashboard/_page.server",
     "src": "src/routes/system-admin-dashboard/+page.server.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_profile.js"
+    ]
   },
   "src/routes/system-admin-dashboard/+page.svelte": {
     "file": "entries/pages/system-admin-dashboard/_page.svelte.js",
     "name": "entries/pages/system-admin-dashboard/_page.svelte",
     "src": "src/routes/system-admin-dashboard/+page.svelte",
     "isEntry": true,
+    "imports": [
+      "_AppFooter.js"
+    ],
     "css": [
-      "_app/immutable/assets/_page.BH2Lnc9r.css"
+      "_app/immutable/assets/_page.Cn6Ju0B9.css"
     ]
   },
   "src/routes/system-admin-dashboard/add-child/+page.server.js": {
     "file": "entries/pages/system-admin-dashboard/add-child/_page.server.js",
     "name": "entries/pages/system-admin-dashboard/add-child/_page.server",
     "src": "src/routes/system-admin-dashboard/add-child/+page.server.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_profile.js"
+    ]
   },
   "src/routes/system-admin-dashboard/add-child/+page.svelte": {
     "file": "entries/pages/system-admin-dashboard/add-child/_page.svelte.js",
@@ -210,21 +314,25 @@
     "src": "src/routes/system-admin-dashboard/add-child/+page.svelte",
     "isEntry": true,
     "imports": [
-      "_escaping.js",
+      "_renderer.js",
       "_exports.js",
       "_utils.js",
       "_root.js",
-      "_state.svelte.js"
+      "_state.svelte.js",
+      "_AppFooter.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.WyITxhRe.css"
+      "_app/immutable/assets/_page.CBKAvB_R.css"
     ]
   },
   "src/routes/system-admin-dashboard/add-parent/+page.server.js": {
     "file": "entries/pages/system-admin-dashboard/add-parent/_page.server.js",
     "name": "entries/pages/system-admin-dashboard/add-parent/_page.server",
     "src": "src/routes/system-admin-dashboard/add-parent/+page.server.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_profile.js"
+    ]
   },
   "src/routes/system-admin-dashboard/add-parent/+page.svelte": {
     "file": "entries/pages/system-admin-dashboard/add-parent/_page.svelte.js",
@@ -233,21 +341,76 @@
     "isEntry": true,
     "imports": [
       "_renderer.js",
-      "_escaping.js",
       "_exports.js",
       "_utils.js",
       "_root.js",
-      "_state.svelte.js"
+      "_state.svelte.js",
+      "_AppFooter.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.B0mWa4Wa.css"
+      "_app/immutable/assets/_page.DraQDlDT.css"
+    ]
+  },
+  "src/routes/system-admin-dashboard/announcements/+page.server.js": {
+    "file": "entries/pages/system-admin-dashboard/announcements/_page.server.js",
+    "name": "entries/pages/system-admin-dashboard/announcements/_page.server",
+    "src": "src/routes/system-admin-dashboard/announcements/+page.server.js",
+    "isEntry": true,
+    "imports": [
+      "_profile.js"
+    ]
+  },
+  "src/routes/system-admin-dashboard/announcements/+page.svelte": {
+    "file": "entries/pages/system-admin-dashboard/announcements/_page.svelte.js",
+    "name": "entries/pages/system-admin-dashboard/announcements/_page.svelte",
+    "src": "src/routes/system-admin-dashboard/announcements/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_renderer.js",
+      "_exports.js",
+      "_utils.js",
+      "_root.js",
+      "_state.svelte.js",
+      "_AppFooter.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.DlApE6dd.css"
+    ]
+  },
+  "src/routes/system-admin-dashboard/create-class/+page.server.js": {
+    "file": "entries/pages/system-admin-dashboard/create-class/_page.server.js",
+    "name": "entries/pages/system-admin-dashboard/create-class/_page.server",
+    "src": "src/routes/system-admin-dashboard/create-class/+page.server.js",
+    "isEntry": true,
+    "imports": [
+      "_profile.js"
+    ]
+  },
+  "src/routes/system-admin-dashboard/create-class/+page.svelte": {
+    "file": "entries/pages/system-admin-dashboard/create-class/_page.svelte.js",
+    "name": "entries/pages/system-admin-dashboard/create-class/_page.svelte",
+    "src": "src/routes/system-admin-dashboard/create-class/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_renderer.js",
+      "_exports.js",
+      "_utils.js",
+      "_root.js",
+      "_state.svelte.js",
+      "_AppFooter.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.DRHYUHlP.css"
     ]
   },
   "src/routes/system-admin-dashboard/registration-requests/+page.server.js": {
     "file": "entries/pages/system-admin-dashboard/registration-requests/_page.server.js",
     "name": "entries/pages/system-admin-dashboard/registration-requests/_page.server",
     "src": "src/routes/system-admin-dashboard/registration-requests/+page.server.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_profile.js"
+    ]
   },
   "src/routes/system-admin-dashboard/registration-requests/+page.svelte": {
     "file": "entries/pages/system-admin-dashboard/registration-requests/_page.svelte.js",
@@ -258,10 +421,20 @@
       "_exports.js",
       "_utils.js",
       "_root.js",
-      "_state.svelte.js"
+      "_state.svelte.js",
+      "_AppFooter.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.IWgcfLdJ.css"
+      "_app/immutable/assets/_page.C0BKmsla.css"
+    ]
+  },
+  "src/routes/system-admin-dashboard/users/+page.server.js": {
+    "file": "entries/pages/system-admin-dashboard/users/_page.server.js",
+    "name": "entries/pages/system-admin-dashboard/users/_page.server",
+    "src": "src/routes/system-admin-dashboard/users/+page.server.js",
+    "isEntry": true,
+    "imports": [
+      "_profile.js"
     ]
   },
   "src/routes/system-admin-dashboard/users/+page.svelte": {
@@ -271,17 +444,20 @@
     "isEntry": true,
     "imports": [
       "_renderer.js",
-      "_escaping.js"
+      "_AppFooter.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.N0lcEswa.css"
+      "_app/immutable/assets/_page.CCoIbssd.css"
     ]
   },
   "src/routes/teacher-dashboard/+layout.server.js": {
     "file": "entries/pages/teacher-dashboard/_layout.server.js",
     "name": "entries/pages/teacher-dashboard/_layout.server",
     "src": "src/routes/teacher-dashboard/+layout.server.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_profile.js"
+    ]
   },
   "src/routes/teacher-dashboard/+page.server.js": {
     "file": "entries/pages/teacher-dashboard/_page.server.js",
@@ -293,6 +469,17 @@
     "file": "entries/pages/teacher-dashboard/_page.svelte.js",
     "name": "entries/pages/teacher-dashboard/_page.svelte",
     "src": "src/routes/teacher-dashboard/+page.svelte",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_renderer.js",
+      "_exports.js",
+      "_utils.js",
+      "_root.js",
+      "_state.svelte.js",
+      "_AppFooter.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.BGWIKlIz.css"
+    ]
   }
 }

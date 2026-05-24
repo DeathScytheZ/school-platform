@@ -5,6 +5,7 @@ const {Account, AccountStatus} = require('../models/Account');
 const User = require('../models/User');
 const {Parent} = require('../models/Parent');
 const {Child} = require('../models/Child');
+const ClassStd = require('../models/ClassStd');
 
 const getRequestList = async (req, res) =>  {
     try {
@@ -34,8 +35,8 @@ const getUserList = async (req, res) => {
 }
 
 const createChild = async (req, res) => {
-    const {officialId, password, firstName, lastName, dateOfBirth, level, medicalCondition} = req.body;
-    if(!officialId || !password || !firstName || !lastName || !dateOfBirth || !level || !medicalCondition) {
+    const {officialId, password, firstName, lastName, dateOfBirth, level, medicalCondition, classId} = req.body;
+    if(!officialId || !password || !firstName || !lastName || !dateOfBirth || !level || !medicalCondition || !classId) {
         return res.status(400).json({
             success: false,
             message: 'All fields are required'
@@ -69,6 +70,7 @@ const createChild = async (req, res) => {
             user.insertId,
             level,
             medicalCondition,
+            classId,
             connection
         );
 
@@ -89,8 +91,8 @@ const createChild = async (req, res) => {
 }
 
 const createParent = async (req, res) => {
-    const {officialId, password, firstName, lastName, dateOfBirth, wilaya, commune, childIds} = req.body;
-    if(!officialId || !password || !firstName || !lastName || !dateOfBirth || !wilaya || !commune || !Array.isArray(childIds)) {
+    const {officialId, password, firstName, lastName, dateOfBirth, phone, email, wilaya, commune, childIds} = req.body;
+    if(!officialId || !password || !firstName || !lastName || !dateOfBirth || !phone || !email || !wilaya || !commune || !Array.isArray(childIds)) {
         return res.status(400).json({
             success: false,
             message: 'All fields are required'
@@ -115,8 +117,8 @@ const createParent = async (req, res) => {
             firstName,
             lastName,
             dateOfBirth,
-            null,
-            null,
+            phone,
+            email,
             connection
         );
 
@@ -167,4 +169,60 @@ const getChildren = async (req, res) => {
     }
 }
 
-module.exports = { getRequestList, getUserList, createChild, createParent, getChildren };
+const createClass = async (req, res) => {
+    const {name, year, level} = req.body;
+    if(!name || !year || !level) {
+        return res.status(400).json({
+            success: false,
+            message: 'All fields are required'
+        });
+    }
+
+    try {
+        const class_std_id = await ClassStd.createClassStd(name, year, level);
+        return res.status(201).json({
+            success: true,
+            class_std_id
+        });
+    } catch(error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+}
+
+const getAvailableClasses = async (req, res) => {
+    const {type} = req.params;
+    try {
+        const classes = await ClassStd.getAvailableClassesByType(type);
+
+        return res.status(200).json({
+            success: true,
+            classes
+        });
+    } catch(error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+}
+
+const getClasses = async (req, res) => {
+    try {
+        const classes = await ClassStd.getClassList();
+
+        return res.status(200).json({
+            success: true,
+            classes
+        });
+    } catch(error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+}
+
+module.exports = { getRequestList, getUserList, createChild, createParent, getChildren, createClass, getAvailableClasses, getClasses };

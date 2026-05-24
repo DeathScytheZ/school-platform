@@ -1,10 +1,16 @@
 <script>
     import { enhance } from "$app/forms";
     import { onMount } from "svelte";
+    import AppHeader from '$lib/components/AppHeader.svelte';
+    import AppFooter from '$lib/components/AppFooter.svelte';
+
+    let { data: pageData } = $props();
 
     let data = $state([]);
     let loading = $state(true);
     let error = $state('');
+    let availableClasses = $state({});
+    let selectedClassIds = $state({});
 
     const statusColors = {
         pending: '#f59e0b',
@@ -14,6 +20,21 @@
         rejected: '#ef4444'
     };
 
+    async function loadAvailableClasses(row) {
+        if(row.role !== 'teacher' || availableClasses[row.id]) return;
+
+        try {
+            const response = await fetch(`http://localhost:3000/api/system-admin-dashboard/available-classes/${row.role_detail}`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" }
+            });
+            const responseData = await response.json();
+            availableClasses[row.id] = responseData.classes ?? [];
+        } catch(e) {
+            availableClasses[row.id] = [];
+        }
+    }
+
     onMount(async () => {
         try {
             const response = await fetch("http://localhost:3000/api/system-admin-dashboard/request", {
@@ -22,6 +43,7 @@
             });
             const responseData = await response.json();
             data = responseData.requests ?? [];
+            await Promise.all(data.filter((row) => row.role === 'teacher').map(loadAvailableClasses));
         } catch(e) {
             error = 'Failed to load requests.';
         } finally {
@@ -31,10 +53,14 @@
 </script>
 
 <div class="page">
-    <header>
-        <a href="/system-admin-dashboard" class="back-link">← Dashboard</a>
-        <h1>Registration Requests</h1>
-    </header>
+    <AppHeader
+        profile={pageData.profile}
+        eyebrow="Administration"
+        title="Registration Requests"
+        subtitle="Review, approve, or reject pending teacher and staff access requests."
+        backHref="/system-admin-dashboard"
+        backLabel="← Dashboard"
+    />
 
     {#if loading}
         <p class="state-msg">Loading…</p>
@@ -76,6 +102,19 @@
                             <td>
                                 <form method="POST" action="?/approveRequest" use:enhance>
                                     <input type="hidden" name="id" value={row.id}>
+                                    {#if row.role === 'teacher'}
+                                        <select
+                                            class="class-select"
+                                            required
+                                            onchange={(event) => selectedClassIds[row.id] = event.currentTarget.value}
+                                        >
+                                            <option value="" disabled selected>Select class</option>
+                                            {#each availableClasses[row.id] || [] as classItem}
+                                                <option value={classItem.id}>{classItem.name} {classItem.year} {classItem.level}</option>
+                                            {/each}
+                                        </select>
+                                        <input type="hidden" name="classId" value={selectedClassIds[row.id] || ''}>
+                                    {/if}
                                     <button class="btn approve" type="submit">Approve</button>
                                 </form>
                             </td>
@@ -91,14 +130,19 @@
             </table>
         </div>
     {/if}
+
+    <AppFooter profile={pageData.profile} context="Registration review" />
 </div>
 
 <style>
     :global(html, body) {
-        margin: 0; padding: 0;
-        background: #0f1117;
-        color: #e2e8f0;
-        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 0;
+        background:
+            radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.9), transparent 28%),
+            linear-gradient(135deg, #f2f4f7 0%, #d8dde7 100%);
+        color: #101424;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         min-height: 100dvh;
     }
 
@@ -108,40 +152,20 @@
         padding: 2rem;
     }
 
-    header {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        margin-bottom: 2rem;
-    }
-
-    h1 {
-        font-size: 1.6rem;
-        font-weight: 600;
-        color: #f1f5f9;
-        margin: 0;
-    }
-
-    .back-link {
-        color: #94a3b8;
-        text-decoration: none;
-        font-size: 0.9rem;
-        transition: color 0.2s;
-    }
-    .back-link:hover { color: #e2e8f0; }
-
     .state-msg {
         text-align: center;
-        color: #64748b;
+        color: #687086;
         margin-top: 4rem;
         font-size: 1rem;
     }
-    .state-msg.error { color: #f87171; }
+    .state-msg.error { color: #a22929; }
 
     .table-wrapper {
         overflow-x: auto;
-        border-radius: 12px;
-        border: 1px solid #1e293b;
+        border-radius: 8px;
+        border: 1px solid rgba(217, 222, 234, 0.95);
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 24px 70px rgba(22, 28, 45, 0.1);
     }
 
     table {
@@ -151,14 +175,14 @@
     }
 
     thead tr {
-        background: #1e293b;
+        background: #f7f8fc;
     }
 
     th {
         padding: 0.85rem 1rem;
         text-align: left;
         font-weight: 600;
-        color: #94a3b8;
+        color: #687086;
         text-transform: uppercase;
         font-size: 0.75rem;
         letter-spacing: 0.05em;
@@ -166,23 +190,23 @@
     }
 
     tbody tr {
-        border-top: 1px solid #1e293b;
+        border-top: 1px solid #e6eaf2;
         transition: background 0.15s;
     }
-    tbody tr:hover { background: #161c28; }
+    tbody tr:hover { background: #fbfcff; }
 
     td {
         padding: 0.85rem 1rem;
         vertical-align: middle;
-        color: #cbd5e1;
+        color: #242b42;
     }
 
     code {
-        background: #1e293b;
+        background: #eef1ff;
         padding: 2px 6px;
         border-radius: 4px;
         font-size: 0.8rem;
-        color: #7dd3fc;
+        color: #3345ff;
     }
 
     .badge {
@@ -195,18 +219,28 @@
         color: #fff;
     }
 
-    .badge.role { background: #334155; }
+    .badge.role { background: #687086; }
 
     .btn {
         padding: 5px 14px;
         border: none;
-        border-radius: 6px;
+        border-radius: 4px;
         font-size: 0.8rem;
         font-weight: 600;
         cursor: pointer;
         transition: opacity 0.2s;
     }
     .btn:hover { opacity: 0.8; }
-    .btn.approve { background: #10b981; color: #fff; }
-    .btn.reject  { background: #ef4444; color: #fff; }
+    .btn.approve { background: #0f9f6e; color: #fff; }
+    .btn.reject  { background: #d83b3b; color: #fff; }
+
+    .class-select {
+        background: #ffffff;
+        border: 1px solid #d9deea;
+        border-radius: 4px;
+        color: #101424;
+        font-size: 0.8rem;
+        margin-right: 0.5rem;
+        padding: 5px 8px;
+    }
 </style>

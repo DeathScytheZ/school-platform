@@ -9,10 +9,7 @@ router.post('/login', authController.login);
 router.post('/addUser', authController.addUser);
 router.post('/rejectUser', authController.rejectUser);
 router.get('/students', authenticate, studentController.studentList);
-router.get('/profile', authenticate, (req, res) => {
-    res.json({success: true, user: req.user});
-});
+router.get('/profile', authenticate, authController.getProfile);
 
 
 module.exports = router;
-

@@ -33,7 +33,14 @@ export const actions = {
 				maxAge: 7 * 24 * 60 * 60
 			});
 
-			const destination = result.role === 'teacher' ? '/teacher-dashboard' : '/staff-dashboard';
+			const destinations = {
+				teacher: '/teacher-dashboard',
+				staff: '/staff-dashboard',
+				parent: '/parent-dashboard',
+				child: '/child-dashboard',
+				admin: '/system-admin-dashboard'
+			};
+			const destination = destinations[result.role] || '/';
 			throw redirect(303, destination);
 		} catch (error) {
 			if (error.status === 303) throw error;

@@ -1,15 +1,23 @@
 import { fail } from "@sveltejs/kit";
+import { loadProfile } from '$lib/server/profile';
+
+export const load = async ({ fetch, cookies, locals }) => {
+    return {
+        profile: await loadProfile(fetch, cookies, locals)
+    };
+};
 
 export const actions = {
     approveRequest: async ({ request}) => {
         const formData = await request.formData();
         const requestId = formData.get('id');
+        const classId = formData.get('classId');
 
         try {
             const response = await fetch("http://localhost:3000/api/auth/addUser", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ 'id': requestId })
+                body: JSON.stringify({ 'id': requestId, classId })
             });
 
             const result = await response.json();

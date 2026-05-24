@@ -10,7 +10,7 @@ return {
 	assets: new Set(["agnes-tachyon-uma-musume.gif","favicon.svg","robots.txt","uma-musume-meep.gif"]),
 	mimeTypes: {".gif":"image/gif",".svg":"image/svg+xml",".txt":"text/plain"},
 	_: {
-		client: {start:"_app/immutable/entry/start.D_chh5dU.js",app:"_app/immutable/entry/app.Bgu36ykH.js",imports:["_app/immutable/entry/start.D_chh5dU.js","_app/immutable/chunks/B0e3DZEQ.js","_app/immutable/chunks/B7qgeUId.js","_app/immutable/chunks/CE5cqHET.js","_app/immutable/chunks/BhusDmbJ.js","_app/immutable/entry/app.Bgu36ykH.js","_app/immutable/chunks/CE5cqHET.js","_app/immutable/chunks/BhusDmbJ.js","_app/immutable/chunks/DsnmJJEf.js","_app/immutable/chunks/B7qgeUId.js","_app/immutable/chunks/DjA-N_CN.js","_app/immutable/chunks/BwgKaK4f.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
+		client: {start:"_app/immutable/entry/start.n_fZaDde.js",app:"_app/immutable/entry/app.BJR8H-GT.js",imports:["_app/immutable/entry/start.n_fZaDde.js","_app/immutable/chunks/D6Gu_bJq.js","_app/immutable/chunks/Dq0B8LfS.js","_app/immutable/chunks/CWvp9Glw.js","_app/immutable/chunks/DEAEsUb4.js","_app/immutable/entry/app.BJR8H-GT.js","_app/immutable/chunks/CWvp9Glw.js","_app/immutable/chunks/DEAEsUb4.js","_app/immutable/chunks/DsnmJJEf.js","_app/immutable/chunks/Dq0B8LfS.js","_app/immutable/chunks/Wy4jd99D.js","_app/immutable/chunks/apFby0wk.js","_app/immutable/chunks/D7JJ4kuK.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
 		nodes: [
 			__memo(() => import('./nodes/0.js')),
 			__memo(() => import('./nodes/1.js')),
@@ -24,7 +24,12 @@ return {
 			__memo(() => import('./nodes/9.js')),
 			__memo(() => import('./nodes/10.js')),
 			__memo(() => import('./nodes/11.js')),
-			__memo(() => import('./nodes/12.js'))
+			__memo(() => import('./nodes/12.js')),
+			__memo(() => import('./nodes/13.js')),
+			__memo(() => import('./nodes/14.js')),
+			__memo(() => import('./nodes/15.js')),
+			__memo(() => import('./nodes/16.js')),
+			__memo(() => import('./nodes/17.js'))
 		],
 		remotes: {
 			
@@ -45,52 +50,87 @@ return {
 				endpoint: null
 			},
 			{
+				id: "/child-dashboard",
+				pattern: /^\/child-dashboard\/?$/,
+				params: [],
+				page: { layouts: [0,], errors: [1,], leaf: 6 },
+				endpoint: null
+			},
+			{
+				id: "/parent-dashboard",
+				pattern: /^\/parent-dashboard\/?$/,
+				params: [],
+				page: { layouts: [0,], errors: [1,], leaf: 7 },
+				endpoint: null
+			},
+			{
 				id: "/staff-dashboard",
 				pattern: /^\/staff-dashboard\/?$/,
 				params: [],
-				page: { layouts: [0,2,], errors: [1,,], leaf: 6 },
+				page: { layouts: [0,2,], errors: [1,,], leaf: 8 },
+				endpoint: null
+			},
+			{
+				id: "/staff-dashboard/announcements",
+				pattern: /^\/staff-dashboard\/announcements\/?$/,
+				params: [],
+				page: { layouts: [0,2,], errors: [1,,], leaf: 9 },
 				endpoint: null
 			},
 			{
 				id: "/system-admin-dashboard",
 				pattern: /^\/system-admin-dashboard\/?$/,
 				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 7 },
+				page: { layouts: [0,], errors: [1,], leaf: 10 },
 				endpoint: null
 			},
 			{
 				id: "/system-admin-dashboard/add-child",
 				pattern: /^\/system-admin-dashboard\/add-child\/?$/,
 				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 8 },
+				page: { layouts: [0,], errors: [1,], leaf: 11 },
 				endpoint: null
 			},
 			{
 				id: "/system-admin-dashboard/add-parent",
 				pattern: /^\/system-admin-dashboard\/add-parent\/?$/,
 				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 9 },
+				page: { layouts: [0,], errors: [1,], leaf: 12 },
+				endpoint: null
+			},
+			{
+				id: "/system-admin-dashboard/announcements",
+				pattern: /^\/system-admin-dashboard\/announcements\/?$/,
+				params: [],
+				page: { layouts: [0,], errors: [1,], leaf: 13 },
+				endpoint: null
+			},
+			{
+				id: "/system-admin-dashboard/create-class",
+				pattern: /^\/system-admin-dashboard\/create-class\/?$/,
+				params: [],
+				page: { layouts: [0,], errors: [1,], leaf: 14 },
 				endpoint: null
 			},
 			{
 				id: "/system-admin-dashboard/registration-requests",
 				pattern: /^\/system-admin-dashboard\/registration-requests\/?$/,
 				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 10 },
+				page: { layouts: [0,], errors: [1,], leaf: 15 },
 				endpoint: null
 			},
 			{
 				id: "/system-admin-dashboard/users",
 				pattern: /^\/system-admin-dashboard\/users\/?$/,
 				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 11 },
+				page: { layouts: [0,], errors: [1,], leaf: 16 },
 				endpoint: null
 			},
 			{
 				id: "/teacher-dashboard",
 				pattern: /^\/teacher-dashboard\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 12 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 17 },
 				endpoint: null
 			}
 		],

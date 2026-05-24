@@ -7,6 +7,7 @@ const User = require('../models/User');
 const Teacher = require('../models/Teacher');
 const Staff = require('../models/Staff');
 const GovOfficial = require('../models/GovOfficial');
+const ClassStd = require('../models/ClassStd');
 
 const signup = async (req, res) => {
     const {officialId, password, firstName, lastName, dateOfBirth, phone, email, role, roleDetail} = req.body;
@@ -53,7 +54,7 @@ const signup = async (req, res) => {
 }
 
 const addUser = async(req, res) => {
-    const { id } = req.body;
+    const { id, classId } = req.body;
     if(!id) {
         return res.status(400).json({
             success: false,
@@ -92,11 +93,20 @@ const addUser = async(req, res) => {
         );
 
         if(registrationRequest.role === 'teacher') {
-            await Teacher.createTeacher(
+            const teacher = await Teacher.createTeacher(
                 user.insertId,
                 registrationRequest.role_detail,
                 connection
             );
+
+            if(classId) {
+                await ClassStd.assignTeacherToClass(
+                    registrationRequest.role_detail,
+                    classId,
+                    teacher.insertId,
+                    connection
+                );
+            }
         }else if(registrationRequest.role === 'staff') {
             await Staff.createStaff(
                 user.insertId,
@@ -192,10 +202,31 @@ const login = async (req, res) => {
     }
 }
 
+const getProfile = async (req, res) => {
+    try {
+        const profile = await User.getProfileByAccountId(req.user.id);
+
+        return res.status(200).json({
+            success: true,
+            user: {
+                id: req.user.id,
+                role: req.user.role,
+                ...(profile || {})
+            }
+        });
+    } catch(error) {
+        console.error('error fetching profile', error);
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+}
+
 module.exports = {
     signup,
     addUser,
     rejectUser,
-    login
+    login,
+    getProfile
 };
-

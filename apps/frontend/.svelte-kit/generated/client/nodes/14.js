@@ -1,0 +1,1 @@
+export { default as component } from "../../../../src/routes/system-admin-dashboard/create-class/+page.svelte";

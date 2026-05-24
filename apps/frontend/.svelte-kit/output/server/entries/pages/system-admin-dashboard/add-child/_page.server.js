@@ -1,4 +1,19 @@
 import { fail } from "@sveltejs/kit";
+import { l as loadProfile } from "../../../../chunks/profile.js";
+const load = async ({ fetch: fetch2, cookies, locals }) => {
+  const profile = await loadProfile(fetch2, cookies, locals);
+  try {
+    const response = await fetch2("http://localhost:3000/api/system-admin-dashboard/classes");
+    if (!response.ok) {
+      return { classes: [], profile };
+    }
+    const result = await response.json();
+    return { classes: result.classes || [], profile };
+  } catch (error) {
+    console.error("Error loading classes:", error);
+    return { classes: [], profile };
+  }
+};
 const actions = {
   createChild: async ({ request }) => {
     const formData = await request.formData();
@@ -9,7 +24,8 @@ const actions = {
       lastName: formData.get("lastName"),
       dateOfBirth: formData.get("dateOfBirth"),
       level: formData.get("level"),
-      medicalCondition: formData.get("medicalCondition")
+      medicalCondition: formData.get("medicalCondition"),
+      classId: formData.get("classId")
     };
     try {
       const response = await fetch("http://localhost:3000/api/system-admin-dashboard/create-child", {
@@ -29,5 +45,6 @@ const actions = {
   }
 };
 export {
-  actions
+  actions,
+  load
 };

@@ -1,12 +1,22 @@
-import { a as attr, e as ensure_array_like, a1 as attr_class } from "../../../../chunks/renderer.js";
-import { e as escape_html } from "../../../../chunks/escaping.js";
+import { c as attr, a as ensure_array_like, b as attr_class, e as escape_html } from "../../../../chunks/renderer.js";
+import { A as AppHeader, a as AppFooter } from "../../../../chunks/AppFooter.js";
 function _page($$renderer, $$props) {
   $$renderer.component(($$renderer2) => {
+    let { data } = $$props;
     let searchName = "";
     let searchId = "";
     let selectedRole = "all";
     const roles = ["all", "teacher", "staff"];
-    $$renderer2.push(`<div class="page svelte-emalnu"><header class="svelte-emalnu"><a href="/system-admin-dashboard" class="back-link svelte-emalnu">← Dashboard</a> <h1 class="svelte-emalnu">Users</h1></header> <div class="filters svelte-emalnu"><input class="filter-input svelte-emalnu" type="text" placeholder="Search by name…"${attr("value", searchName)}/> <input class="filter-input svelte-emalnu" type="text" placeholder="Search by official ID…"${attr("value", searchId)}/> <div class="role-tabs svelte-emalnu"><!--[-->`);
+    $$renderer2.push(`<div class="page svelte-emalnu">`);
+    AppHeader($$renderer2, {
+      profile: data.profile,
+      eyebrow: "Administration",
+      title: "Users",
+      subtitle: "Browse and filter registered teacher and staff accounts.",
+      backHref: "/system-admin-dashboard",
+      backLabel: "← Dashboard"
+    });
+    $$renderer2.push(`<!----> <div class="filters svelte-emalnu"><input class="filter-input svelte-emalnu" type="text" placeholder="Search by name…"${attr("value", searchName)}/> <input class="filter-input svelte-emalnu" type="text" placeholder="Search by official ID…"${attr("value", searchId)}/> <div class="role-tabs svelte-emalnu"><!--[-->`);
     const each_array = ensure_array_like(roles);
     for (let $$index = 0, $$length = each_array.length; $$index < $$length; $$index++) {
       let role = each_array[$$index];
@@ -17,7 +27,9 @@ function _page($$renderer, $$props) {
       $$renderer2.push("<!--[0-->");
       $$renderer2.push(`<p class="state-msg svelte-emalnu">Loading…</p>`);
     }
-    $$renderer2.push(`<!--]--></div>`);
+    $$renderer2.push(`<!--]--> `);
+    AppFooter($$renderer2, { profile: data.profile, context: "User directory" });
+    $$renderer2.push(`<!----></div>`);
   });
 }
 export {

@@ -13,7 +13,12 @@ export const nodes = [
 	() => import('./nodes/9'),
 	() => import('./nodes/10'),
 	() => import('./nodes/11'),
-	() => import('./nodes/12')
+	() => import('./nodes/12'),
+	() => import('./nodes/13'),
+	() => import('./nodes/14'),
+	() => import('./nodes/15'),
+	() => import('./nodes/16'),
+	() => import('./nodes/17')
 ];
 
 export const server_loads = [2,3];
@@ -21,13 +26,18 @@ export const server_loads = [2,3];
 export const dictionary = {
 		"/": [4],
 		"/auth": [~5],
-		"/staff-dashboard": [6,[2]],
-		"/system-admin-dashboard": [~7],
-		"/system-admin-dashboard/add-child": [8],
-		"/system-admin-dashboard/add-parent": [~9],
-		"/system-admin-dashboard/registration-requests": [10],
-		"/system-admin-dashboard/users": [11],
-		"/teacher-dashboard": [12,[3]]
+		"/child-dashboard": [~6],
+		"/parent-dashboard": [~7],
+		"/staff-dashboard": [~8,[2]],
+		"/staff-dashboard/announcements": [~9,[2]],
+		"/system-admin-dashboard": [~10],
+		"/system-admin-dashboard/add-child": [~11],
+		"/system-admin-dashboard/add-parent": [~12],
+		"/system-admin-dashboard/announcements": [~13],
+		"/system-admin-dashboard/create-class": [~14],
+		"/system-admin-dashboard/registration-requests": [~15],
+		"/system-admin-dashboard/users": [~16],
+		"/teacher-dashboard": [~17,[3]]
 	};
 
 export const hooks = {

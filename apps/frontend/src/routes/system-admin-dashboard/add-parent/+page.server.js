@@ -1,17 +1,20 @@
 import { fail } from '@sveltejs/kit';
+import { loadProfile } from '$lib/server/profile';
 
-export const load = async () => {
+export const load = async ({ fetch, cookies, locals }) => {
+    const profile = await loadProfile(fetch, cookies, locals);
+
     try {
         const response = await fetch('http://localhost:3000/api/system-admin-dashboard/children');
         if (!response.ok) {
-            return { children: [] };
+            return { children: [], profile };
         }
 
         const result = await response.json();
-        return { children: result.children || [] };
+        return { children: result.children || [], profile };
     } catch (error) {
         console.error('Error fetching children:', error);
-        return { children: [] };
+        return { children: [], profile };
     }
 };
 
@@ -24,6 +27,8 @@ export const actions = {
             firstName: formData.get('firstName'),
             lastName: formData.get('lastName'),
             dateOfBirth: formData.get('dateOfBirth'),
+            phone: formData.get('phone'),
+            email: formData.get('email'),
             wilaya: formData.get('wilaya'),
             commune: formData.get('commune'),
             childIds: formData.getAll('childIds')

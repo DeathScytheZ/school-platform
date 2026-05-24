@@ -1,15 +1,17 @@
 import { fail } from "@sveltejs/kit";
-const load = async () => {
+import { l as loadProfile } from "../../../../chunks/profile.js";
+const load = async ({ fetch: fetch2, cookies, locals }) => {
+  const profile = await loadProfile(fetch2, cookies, locals);
   try {
-    const response = await fetch("http://localhost:3000/api/system-admin-dashboard/children");
+    const response = await fetch2("http://localhost:3000/api/system-admin-dashboard/children");
     if (!response.ok) {
-      return { children: [] };
+      return { children: [], profile };
     }
     const result = await response.json();
-    return { children: result.children || [] };
+    return { children: result.children || [], profile };
   } catch (error) {
     console.error("Error fetching children:", error);
-    return { children: [] };
+    return { children: [], profile };
   }
 };
 const actions = {
@@ -21,6 +23,8 @@ const actions = {
       firstName: formData.get("firstName"),
       lastName: formData.get("lastName"),
       dateOfBirth: formData.get("dateOfBirth"),
+      phone: formData.get("phone"),
+      email: formData.get("email"),
       wilaya: formData.get("wilaya"),
       commune: formData.get("commune"),
       childIds: formData.getAll("childIds")

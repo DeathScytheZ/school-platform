@@ -7,6 +7,10 @@ const cookieParser = require('cookie-parser');
 
 const authRoutes = require('./routes/authRoutes');
 const systemAdminRoutes = require('./routes/systemAdminRoutes');
+const announcementRoutes = require('./routes/announcementRoutes');
+const teacherRoutes = require('./routes/teacherRoutes');
+const parentRoutes = require('./routes/parentRoutes');
+const childRoutes = require('./routes/childRoutes');
 
 app.use(cors({
     origin : 'http://localhost:5173',
@@ -20,9 +24,11 @@ app.use(cookieParser());
 app.use('/uploads', express.static('uploads'));
 app.use('/api/auth', authRoutes);
 app.use('/api/system-admin-dashboard', systemAdminRoutes);
+app.use('/api/announcements', announcementRoutes);
+app.use('/api/teacher', teacherRoutes);
+app.use('/api/parent', parentRoutes);
+app.use('/api/child', childRoutes);
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
 });
-
-

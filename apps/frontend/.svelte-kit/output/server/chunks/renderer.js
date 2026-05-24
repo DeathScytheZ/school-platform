@@ -1,5 +1,4 @@
 import { l as lifecycle_outside_component, i as invalid_csp, a as await_invalid, g as get_render_context, b as invalid_id_prefix } from "./render-context.js";
-import { e as escape_html } from "./escaping.js";
 import { clsx as clsx$1 } from "clsx";
 import * as devalue from "devalue";
 var ssr_context = null;
@@ -122,6 +121,22 @@ function unresolved_hydratable(key, stack) {
 }
 const BLOCK_OPEN = `<!--${HYDRATION_START}-->`;
 const BLOCK_CLOSE = `<!--${HYDRATION_END}-->`;
+const ATTR_REGEX = /[&"<]/g;
+const CONTENT_REGEX = /[&<]/g;
+function escape_html(value, is_attr) {
+  const str = String(value ?? "");
+  const pattern = is_attr ? ATTR_REGEX : CONTENT_REGEX;
+  pattern.lastIndex = 0;
+  let escaped = "";
+  let last = 0;
+  while (pattern.test(str)) {
+    const i = pattern.lastIndex - 1;
+    const ch = str[i];
+    escaped += str.substring(last, i) + (ch === "&" ? "&amp;" : ch === '"' ? "&quot;" : "&lt;");
+    last = i + 1;
+  }
+  return escaped + str.substring(last);
+}
 const replacements = {
   translate: /* @__PURE__ */ new Map([
     [true, "yes"],
@@ -1143,60 +1158,61 @@ class SSRState {
   }
 }
 export {
-  render as $,
+  is_passive_event as $,
   ASYNC as A,
   BOUNDARY_EFFECT as B,
   COMMENT_NODE as C,
   DIRTY as D,
   ERROR_VALUE as E,
-  STATE_SYMBOL as F,
-  object_prototype as G,
+  EFFECT_PRESERVED as F,
+  REACTION_IS_UPDATING as G,
   HYDRATION_ERROR as H,
   INERT as I,
-  array_prototype as J,
-  get_descriptor as K,
-  get_prototype_of as L,
+  STATE_SYMBOL as J,
+  object_prototype as K,
+  array_prototype as L,
   MAYBE_DIRTY as M,
-  is_array as N,
-  is_extensible as O,
-  HEAD_EFFECT as P,
-  DESTROYING as Q,
+  get_descriptor as N,
+  get_prototype_of as O,
+  is_array as P,
+  is_extensible as Q,
   REACTION_RAN as R,
   STALE_REACTION as S,
-  USER_EFFECT as T,
+  HEAD_EFFECT as T,
   UNINITIALIZED as U,
-  index_of as V,
+  DESTROYING as V,
   WAS_MARKED as W,
-  define_property as X,
-  array_from as Y,
-  is_passive_event as Z,
-  LEGACY_PROPS as _,
-  attr as a,
-  setContext as a0,
-  attr_class as a1,
-  HYDRATION_END as b,
-  HYDRATION_START as c,
+  USER_EFFECT as X,
+  index_of as Y,
+  define_property as Z,
+  array_from as _,
+  ensure_array_like as a,
+  LEGACY_PROPS as a0,
+  render as a1,
+  setContext as a2,
+  attr_class as b,
+  attr as c,
   derived as d,
-  ensure_array_like as e,
-  HYDRATION_START_ELSE as f,
+  escape_html as e,
+  HYDRATION_END as f,
   getContext as g,
-  EFFECT as h,
-  CONNECTED as i,
-  CLEAN as j,
-  DERIVED as k,
-  BLOCK_EFFECT as l,
-  DESTROYED as m,
+  HYDRATION_START as h,
+  HYDRATION_START_ELSE as i,
+  EFFECT as j,
+  CONNECTED as k,
+  CLEAN as l,
+  DERIVED as m,
   noop as n,
-  EAGER_EFFECT as o,
-  deferred as p,
-  RENDER_EFFECT as q,
+  BLOCK_EFFECT as o,
+  DESTROYED as p,
+  EAGER_EFFECT as q,
   run_all as r,
-  MANAGED_EFFECT as s,
-  ROOT_EFFECT as t,
-  BRANCH_EFFECT as u,
-  includes as v,
-  HYDRATION_START_FAILED as w,
-  EFFECT_TRANSPARENT as x,
-  EFFECT_PRESERVED as y,
-  REACTION_IS_UPDATING as z
+  deferred as s,
+  RENDER_EFFECT as t,
+  MANAGED_EFFECT as u,
+  ROOT_EFFECT as v,
+  BRANCH_EFFECT as w,
+  includes as x,
+  HYDRATION_START_FAILED as y,
+  EFFECT_TRANSPARENT as z
 };

@@ -1,17 +1,30 @@
 <script>
     import { enhance } from '$app/forms';
+    import AppHeader from '$lib/components/AppHeader.svelte';
+    import AppFooter from '$lib/components/AppFooter.svelte';
 
     let { data, form } = $props();
 
     let children = $derived(data.children || []);
+
+    function openDatePicker(event) {
+        try {
+            event.currentTarget.showPicker?.();
+        } catch (error) {
+            // Some browsers only allow showPicker during direct pointer interaction.
+        }
+    }
 </script>
 
 <div class="page">
-    <header>
-        <a class="back-link" href="/system-admin-dashboard">← System Admin</a>
-        <h1>Add Parent</h1>
-        <p>Register a new parent and link them to children.</p>
-    </header>
+    <AppHeader
+        profile={data.profile}
+        eyebrow="Administration"
+        title="Add Parent"
+        subtitle="Register a new parent and link them to children."
+        backHref="/system-admin-dashboard"
+        backLabel="← System Admin"
+    />
 
     <section class="form-card">
         <h2>Create Parent</h2>
@@ -38,7 +51,17 @@
 
             <div class="input-group">
                 <label for="parent-dateOfBirth">Date of Birth</label>
-                <input type="date" id="parent-dateOfBirth" name="dateOfBirth" required />
+                <input type="date" id="parent-dateOfBirth" name="dateOfBirth" onclick={openDatePicker} required />
+            </div>
+
+            <div class="input-group">
+                <label for="parent-phone">Phone</label>
+                <input type="tel" id="parent-phone" name="phone" placeholder="ex: 0512345678" required />
+            </div>
+
+            <div class="input-group">
+                <label for="parent-email">Email</label>
+                <input type="email" id="parent-email" name="email" placeholder="ex: parent@example.com" required />
             </div>
 
             <div class="input-group">
@@ -74,59 +97,40 @@
             {/if}
         </form>
     </section>
+
+    <AppFooter profile={data.profile} context="Parent registration" />
 </div>
 
 <style>
     :global(html, body) {
-        margin: 0; padding: 0;
-        background: #0f1117;
-        color: #e2e8f0;
-        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 0;
+        background:
+            radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.9), transparent 28%),
+            linear-gradient(135deg, #f2f4f7 0%, #d8dde7 100%);
+        color: #101424;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         min-height: 100dvh;
     }
 
     .page {
-        max-width: 720px;
+        max-width: 760px;
         margin: 0 auto;
         padding: 4rem 2rem;
     }
 
-    header {
-        margin-bottom: 2rem;
-    }
-
-    .back-link {
-        color: #93c5fd;
-        display: inline-block;
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-        text-decoration: none;
-    }
-
-    header h1 {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #f1f5f9;
-        margin: 0 0 0.4rem;
-    }
-
-    header p {
-        color: #64748b;
-        margin: 0;
-        font-size: 0.95rem;
-    }
-
     .form-card {
-        background: #1e293b;
-        border: 1px solid #334155;
-        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(217, 222, 234, 0.95);
+        border-radius: 8px;
         padding: 1.5rem;
+        box-shadow: 0 24px 70px rgba(22, 28, 45, 0.1);
     }
 
     .form-card h2 {
         font-size: 1rem;
-        font-weight: 600;
-        color: #f1f5f9;
+        font-weight: 800;
+        color: #111936;
         margin: 0 0 1.25rem;
     }
 
@@ -139,21 +143,33 @@
 
     label {
         font-size: 0.82rem;
-        color: #94a3b8;
+        color: #242b42;
+        font-weight: 700;
     }
 
     input {
-        background: #0f1117;
-        border: 1px solid #334155;
-        border-radius: 8px;
-        color: #e2e8f0;
+        background: #ffffff;
+        border: 1px solid #d9deea;
+        border-radius: 4px;
+        color: #101424;
+        color-scheme: light;
         font: inherit;
         padding: 0.7rem 0.75rem;
     }
 
+    input[type="date"] {
+        cursor: pointer;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        cursor: pointer;
+        opacity: 0.75;
+    }
+
     input:focus {
         outline: none;
-        border-color: #4f6a9a;
+        border-color: #3345ff;
+        box-shadow: 0 0 0 4px rgba(51, 69, 255, 0.11);
     }
 
     .children-selection {
@@ -162,15 +178,15 @@
 
     .children-selection h3 {
         font-size: 0.95rem;
-        font-weight: 600;
-        color: #f1f5f9;
+        font-weight: 800;
+        color: #111936;
         margin: 0 0 0.75rem;
     }
 
     .children-list {
-        background: #0f1117;
-        border: 1px solid #334155;
-        border-radius: 8px;
+        background: #fbfcff;
+        border: 1px solid #d9deea;
+        border-radius: 4px;
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
@@ -195,15 +211,16 @@
         margin-top: 1rem;
         padding: 0.8rem 1rem;
         border: 0;
-        border-radius: 8px;
-        background: #2563eb;
+        border-radius: 4px;
+        background: #3345ff;
         color: white;
         cursor: pointer;
-        font-weight: 600;
+        font-weight: 800;
+        box-shadow: 0 14px 26px rgba(51, 69, 255, 0.22);
     }
 
     .submit-btn:hover {
-        background: #1d4ed8;
+        background: #2635df;
     }
 
     .success-msg,
@@ -214,14 +231,16 @@
     }
 
     .success-msg {
-        color: #34d399;
+        color: #0f9f6e;
+        font-weight: 700;
     }
 
     .error-msg {
-        color: #f87171;
+        color: #a22929;
+        font-weight: 700;
     }
 
     .empty-msg {
-        color: #64748b;
+        color: #687086;
     }
 </style>
