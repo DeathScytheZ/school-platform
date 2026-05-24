@@ -3,9 +3,19 @@ const {Performance} = require('../models/Performance');
 const {Behavior} = require('../models/Behavior');
 const {Grade} = require('../models/Grade');
 
+const subjectToGradeType = (subject) => {
+    const normalizedType = {
+        'school-teacher': 'school',
+        'sports-coach': 'sport'
+    }[subject] || subject;
+
+    return ['school', 'quran', 'sport'].includes(normalizedType) ? normalizedType : null;
+};
+
 const getTeacherByIdOrAccountId = async (id) => {
     const [rows] = await schoolDb.execute(
         `SELECT teachers.id,
+                teachers.subject,
                 CASE WHEN users.account_id = ? THEN 0 ELSE 1 END AS match_priority
          FROM teachers
          JOIN users ON teachers.user_id = users.id
@@ -102,18 +112,11 @@ const setBehavior = async (req, res) => {
 };
 
 const addGrade = async (req, res) => {
-    const {teacherId, childId, value, date, type} = req.body;
-    if(!teacherId || !childId || value === undefined || value === null || !date || !type) {
+    const {teacherId, childId, value} = req.body;
+    if(!teacherId || !childId || value === undefined || value === null) {
         return res.status(400).json({
             success: false,
             message: 'All fields are required'
-        });
-    }
-
-    if(!['school', 'quran', 'sport'].includes(type)) {
-        return res.status(400).json({
-            success: false,
-            message: 'Type must be one of school, quran, or sport'
         });
     }
 
@@ -126,7 +129,25 @@ const addGrade = async (req, res) => {
     }
 
     try {
-        await Grade.createGrade(childId, teacherId, numericValue, date, type);
+        const teacher = await getTeacherByIdOrAccountId(teacherId);
+        if(!teacher) {
+            return res.status(404).json({
+                success: false,
+                message: 'Teacher not found'
+            });
+        }
+
+        const type = subjectToGradeType(teacher.subject);
+        if(!type) {
+            return res.status(400).json({
+                success: false,
+                message: 'Unable to determine grade type for this teacher'
+            });
+        }
+
+        const date = new Date().toISOString().slice(0, 10);
+
+        await Grade.createGrade(childId, teacher.id, numericValue, date, type);
         return res.status(201).json({
             success: true,
             message: 'Grade added successfully'

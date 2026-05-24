@@ -82,9 +82,7 @@ const actions = {
     const payload = {
       teacherId: formData.get("teacherId"),
       childId: formData.get("childId"),
-      value: formData.get("value"),
-      date: formData.get("date"),
-      type: formData.get("type")
+      value: formData.get("value")
     };
     try {
       const response = await fetch("http://localhost:3000/api/teacher/grade", {

@@ -1,7 +1,10 @@
 import { fail, redirect } from "@sveltejs/kit";
-const load = async ({ cookies }) => {
+const load = async ({ cookies, url }) => {
   const isPending = cookies.get("signup-pending") === "true";
-  return { isPending };
+  return {
+    isPending,
+    showSignup: url.searchParams.get("mode") === "signup"
+  };
 };
 const actions = {
   login: async ({ request, cookies }) => {

@@ -13,7 +13,14 @@
     let searchId = $state('');
     let selectedRole = $state('all');
 
-    const roles = ['all', 'teacher', 'staff'];
+    const roles = ['all', 'teacher', 'staff', 'parent', 'child'];
+
+    const roleColors = {
+        teacher: '#3345ff',
+        staff: '#0f8aa6',
+        parent: '#7c3aed',
+        child: '#d97706'
+    };
 
     let filtered = $derived(
         allUsers.filter(u => {
@@ -104,7 +111,14 @@
                             <td>{new Date(user.date_of_birth).toLocaleDateString()}</td>
                             <td>{user.phone ?? '—'}</td>
                             <td>{user.email ?? '—'}</td>
-                            <td><span class="badge {user.role}">{user.role}</span></td>
+                            <td>
+                                <span
+                                    class="badge"
+                                    style:background={roleColors[user.role] ?? '#687086'}
+                                >
+                                    {user.role}
+                                </span>
+                            </td>
                         </tr>
                     {/each}
                 </tbody>
@@ -252,6 +266,4 @@
         text-transform: capitalize;
         color: #fff;
     }
-    .badge.teacher { background: #3345ff; }
-    .badge.staff   { background: #0f8aa6; }
 </style>

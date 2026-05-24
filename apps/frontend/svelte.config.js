@@ -4,7 +4,10 @@ import adapter from '@sveltejs/adapter-node';
 const config = { 
     kit: {
         adapter: adapter(),
-    },
+        files: {
+            routes: 'src/views'
+        }
+    }, 
     compilerOptions: {
         runes: true,
     },

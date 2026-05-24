@@ -152,25 +152,28 @@
     "isEntry": true,
     "isDynamicEntry": true
   },
-  "src/routes/+page.svelte": {
+  "src/views/+page.svelte": {
     "file": "entries/pages/_page.svelte.js",
     "name": "entries/pages/_page.svelte",
-    "src": "src/routes/+page.svelte",
+    "src": "src/views/+page.svelte",
     "isEntry": true,
+    "imports": [
+      "_renderer.js"
+    ],
     "css": [
-      "_app/immutable/assets/_page.Dg9IOnbk.css"
+      "_app/immutable/assets/_page.DnZVuR5Y.css"
     ]
   },
-  "src/routes/auth/+page.server.js": {
+  "src/views/auth/+page.server.js": {
     "file": "entries/pages/auth/_page.server.js",
     "name": "entries/pages/auth/_page.server",
-    "src": "src/routes/auth/+page.server.js",
+    "src": "src/views/auth/+page.server.js",
     "isEntry": true
   },
-  "src/routes/auth/+page.svelte": {
+  "src/views/auth/+page.svelte": {
     "file": "entries/pages/auth/_page.svelte.js",
     "name": "entries/pages/auth/_page.svelte",
-    "src": "src/routes/auth/+page.svelte",
+    "src": "src/views/auth/+page.svelte",
     "isEntry": true,
     "imports": [
       "_renderer.js",
@@ -180,91 +183,91 @@
       "_state.svelte.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.BLvwlgNI.css"
+      "_app/immutable/assets/_page.CwLRPVV2.css"
     ]
   },
-  "src/routes/child-dashboard/+page.server.js": {
+  "src/views/child-dashboard/+page.server.js": {
     "file": "entries/pages/child-dashboard/_page.server.js",
     "name": "entries/pages/child-dashboard/_page.server",
-    "src": "src/routes/child-dashboard/+page.server.js",
+    "src": "src/views/child-dashboard/+page.server.js",
     "isEntry": true,
     "imports": [
       "_profile.js"
     ]
   },
-  "src/routes/child-dashboard/+page.svelte": {
+  "src/views/child-dashboard/+page.svelte": {
     "file": "entries/pages/child-dashboard/_page.svelte.js",
     "name": "entries/pages/child-dashboard/_page.svelte",
-    "src": "src/routes/child-dashboard/+page.svelte",
+    "src": "src/views/child-dashboard/+page.svelte",
     "isEntry": true,
     "imports": [
       "_renderer.js",
       "_AppFooter.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.C7JehR7y.css"
+      "_app/immutable/assets/_page.719ivpuy.css"
     ]
   },
-  "src/routes/parent-dashboard/+page.server.js": {
+  "src/views/parent-dashboard/+page.server.js": {
     "file": "entries/pages/parent-dashboard/_page.server.js",
     "name": "entries/pages/parent-dashboard/_page.server",
-    "src": "src/routes/parent-dashboard/+page.server.js",
+    "src": "src/views/parent-dashboard/+page.server.js",
     "isEntry": true,
     "imports": [
       "_profile.js"
     ]
   },
-  "src/routes/parent-dashboard/+page.svelte": {
+  "src/views/parent-dashboard/+page.svelte": {
     "file": "entries/pages/parent-dashboard/_page.svelte.js",
     "name": "entries/pages/parent-dashboard/_page.svelte",
-    "src": "src/routes/parent-dashboard/+page.svelte",
+    "src": "src/views/parent-dashboard/+page.svelte",
     "isEntry": true,
     "imports": [
       "_renderer.js",
       "_AppFooter.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.BNhCSFWO.css"
+      "_app/immutable/assets/_page.rAPSyCtm.css"
     ]
   },
-  "src/routes/staff-dashboard/+layout.server.js": {
+  "src/views/staff-dashboard/+layout.server.js": {
     "file": "entries/pages/staff-dashboard/_layout.server.js",
     "name": "entries/pages/staff-dashboard/_layout.server",
-    "src": "src/routes/staff-dashboard/+layout.server.js",
+    "src": "src/views/staff-dashboard/+layout.server.js",
     "isEntry": true,
     "imports": [
       "_profile.js"
     ]
   },
-  "src/routes/staff-dashboard/+page.server.js": {
+  "src/views/staff-dashboard/+page.server.js": {
     "file": "entries/pages/staff-dashboard/_page.server.js",
     "name": "entries/pages/staff-dashboard/_page.server",
-    "src": "src/routes/staff-dashboard/+page.server.js",
+    "src": "src/views/staff-dashboard/+page.server.js",
     "isEntry": true
   },
-  "src/routes/staff-dashboard/+page.svelte": {
+  "src/views/staff-dashboard/+page.svelte": {
     "file": "entries/pages/staff-dashboard/_page.svelte.js",
     "name": "entries/pages/staff-dashboard/_page.svelte",
-    "src": "src/routes/staff-dashboard/+page.svelte",
+    "src": "src/views/staff-dashboard/+page.svelte",
     "isEntry": true,
     "imports": [
       "_renderer.js",
       "_AppFooter.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.l2jkcj03.css"
+      "_app/immutable/assets/_page.C8B3rNb9.css"
     ]
   },
-  "src/routes/staff-dashboard/announcements/+page.server.js": {
+  "src/views/staff-dashboard/announcements/+page.server.js": {
     "file": "entries/pages/staff-dashboard/announcements/_page.server.js",
     "name": "entries/pages/staff-dashboard/announcements/_page.server",
-    "src": "src/routes/staff-dashboard/announcements/+page.server.js",
+    "src": "src/views/staff-dashboard/announcements/+page.server.js",
     "isEntry": true
   },
-  "src/routes/staff-dashboard/announcements/+page.svelte": {
+  "src/views/staff-dashboard/announcements/+page.svelte": {
     "file": "entries/pages/staff-dashboard/announcements/_page.svelte.js",
     "name": "entries/pages/staff-dashboard/announcements/_page.svelte",
-    "src": "src/routes/staff-dashboard/announcements/+page.svelte",
+    "src": "src/views/staff-dashboard/announcements/+page.svelte",
     "isEntry": true,
     "imports": [
       "_renderer.js",
@@ -275,43 +278,43 @@
       "_AppFooter.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.omc5GVi1.css"
+      "_app/immutable/assets/_page.pA6ITgcn.css"
     ]
   },
-  "src/routes/system-admin-dashboard/+page.server.js": {
+  "src/views/system-admin-dashboard/+page.server.js": {
     "file": "entries/pages/system-admin-dashboard/_page.server.js",
     "name": "entries/pages/system-admin-dashboard/_page.server",
-    "src": "src/routes/system-admin-dashboard/+page.server.js",
+    "src": "src/views/system-admin-dashboard/+page.server.js",
     "isEntry": true,
     "imports": [
       "_profile.js"
     ]
   },
-  "src/routes/system-admin-dashboard/+page.svelte": {
+  "src/views/system-admin-dashboard/+page.svelte": {
     "file": "entries/pages/system-admin-dashboard/_page.svelte.js",
     "name": "entries/pages/system-admin-dashboard/_page.svelte",
-    "src": "src/routes/system-admin-dashboard/+page.svelte",
+    "src": "src/views/system-admin-dashboard/+page.svelte",
     "isEntry": true,
     "imports": [
       "_AppFooter.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.Cn6Ju0B9.css"
+      "_app/immutable/assets/_page.BiqZt-El.css"
     ]
   },
-  "src/routes/system-admin-dashboard/add-child/+page.server.js": {
+  "src/views/system-admin-dashboard/add-child/+page.server.js": {
     "file": "entries/pages/system-admin-dashboard/add-child/_page.server.js",
     "name": "entries/pages/system-admin-dashboard/add-child/_page.server",
-    "src": "src/routes/system-admin-dashboard/add-child/+page.server.js",
+    "src": "src/views/system-admin-dashboard/add-child/+page.server.js",
     "isEntry": true,
     "imports": [
       "_profile.js"
     ]
   },
-  "src/routes/system-admin-dashboard/add-child/+page.svelte": {
+  "src/views/system-admin-dashboard/add-child/+page.svelte": {
     "file": "entries/pages/system-admin-dashboard/add-child/_page.svelte.js",
     "name": "entries/pages/system-admin-dashboard/add-child/_page.svelte",
-    "src": "src/routes/system-admin-dashboard/add-child/+page.svelte",
+    "src": "src/views/system-admin-dashboard/add-child/+page.svelte",
     "isEntry": true,
     "imports": [
       "_renderer.js",
@@ -322,22 +325,22 @@
       "_AppFooter.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.CBKAvB_R.css"
+      "_app/immutable/assets/_page.D-tarmnn.css"
     ]
   },
-  "src/routes/system-admin-dashboard/add-parent/+page.server.js": {
+  "src/views/system-admin-dashboard/add-parent/+page.server.js": {
     "file": "entries/pages/system-admin-dashboard/add-parent/_page.server.js",
     "name": "entries/pages/system-admin-dashboard/add-parent/_page.server",
-    "src": "src/routes/system-admin-dashboard/add-parent/+page.server.js",
+    "src": "src/views/system-admin-dashboard/add-parent/+page.server.js",
     "isEntry": true,
     "imports": [
       "_profile.js"
     ]
   },
-  "src/routes/system-admin-dashboard/add-parent/+page.svelte": {
+  "src/views/system-admin-dashboard/add-parent/+page.svelte": {
     "file": "entries/pages/system-admin-dashboard/add-parent/_page.svelte.js",
     "name": "entries/pages/system-admin-dashboard/add-parent/_page.svelte",
-    "src": "src/routes/system-admin-dashboard/add-parent/+page.svelte",
+    "src": "src/views/system-admin-dashboard/add-parent/+page.svelte",
     "isEntry": true,
     "imports": [
       "_renderer.js",
@@ -348,22 +351,22 @@
       "_AppFooter.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.DraQDlDT.css"
+      "_app/immutable/assets/_page.DVSKRdXr.css"
     ]
   },
-  "src/routes/system-admin-dashboard/announcements/+page.server.js": {
+  "src/views/system-admin-dashboard/announcements/+page.server.js": {
     "file": "entries/pages/system-admin-dashboard/announcements/_page.server.js",
     "name": "entries/pages/system-admin-dashboard/announcements/_page.server",
-    "src": "src/routes/system-admin-dashboard/announcements/+page.server.js",
+    "src": "src/views/system-admin-dashboard/announcements/+page.server.js",
     "isEntry": true,
     "imports": [
       "_profile.js"
     ]
   },
-  "src/routes/system-admin-dashboard/announcements/+page.svelte": {
+  "src/views/system-admin-dashboard/announcements/+page.svelte": {
     "file": "entries/pages/system-admin-dashboard/announcements/_page.svelte.js",
     "name": "entries/pages/system-admin-dashboard/announcements/_page.svelte",
-    "src": "src/routes/system-admin-dashboard/announcements/+page.svelte",
+    "src": "src/views/system-admin-dashboard/announcements/+page.svelte",
     "isEntry": true,
     "imports": [
       "_renderer.js",
@@ -374,22 +377,22 @@
       "_AppFooter.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.DlApE6dd.css"
+      "_app/immutable/assets/_page.JIGhcCKM.css"
     ]
   },
-  "src/routes/system-admin-dashboard/create-class/+page.server.js": {
+  "src/views/system-admin-dashboard/create-class/+page.server.js": {
     "file": "entries/pages/system-admin-dashboard/create-class/_page.server.js",
     "name": "entries/pages/system-admin-dashboard/create-class/_page.server",
-    "src": "src/routes/system-admin-dashboard/create-class/+page.server.js",
+    "src": "src/views/system-admin-dashboard/create-class/+page.server.js",
     "isEntry": true,
     "imports": [
       "_profile.js"
     ]
   },
-  "src/routes/system-admin-dashboard/create-class/+page.svelte": {
+  "src/views/system-admin-dashboard/create-class/+page.svelte": {
     "file": "entries/pages/system-admin-dashboard/create-class/_page.svelte.js",
     "name": "entries/pages/system-admin-dashboard/create-class/_page.svelte",
-    "src": "src/routes/system-admin-dashboard/create-class/+page.svelte",
+    "src": "src/views/system-admin-dashboard/create-class/+page.svelte",
     "isEntry": true,
     "imports": [
       "_renderer.js",
@@ -400,22 +403,22 @@
       "_AppFooter.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.DRHYUHlP.css"
+      "_app/immutable/assets/_page.D1DJVH8m.css"
     ]
   },
-  "src/routes/system-admin-dashboard/registration-requests/+page.server.js": {
+  "src/views/system-admin-dashboard/registration-requests/+page.server.js": {
     "file": "entries/pages/system-admin-dashboard/registration-requests/_page.server.js",
     "name": "entries/pages/system-admin-dashboard/registration-requests/_page.server",
-    "src": "src/routes/system-admin-dashboard/registration-requests/+page.server.js",
+    "src": "src/views/system-admin-dashboard/registration-requests/+page.server.js",
     "isEntry": true,
     "imports": [
       "_profile.js"
     ]
   },
-  "src/routes/system-admin-dashboard/registration-requests/+page.svelte": {
+  "src/views/system-admin-dashboard/registration-requests/+page.svelte": {
     "file": "entries/pages/system-admin-dashboard/registration-requests/_page.svelte.js",
     "name": "entries/pages/system-admin-dashboard/registration-requests/_page.svelte",
-    "src": "src/routes/system-admin-dashboard/registration-requests/+page.svelte",
+    "src": "src/views/system-admin-dashboard/registration-requests/+page.svelte",
     "isEntry": true,
     "imports": [
       "_exports.js",
@@ -425,50 +428,50 @@
       "_AppFooter.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.C0BKmsla.css"
+      "_app/immutable/assets/_page.DIbay7pP.css"
     ]
   },
-  "src/routes/system-admin-dashboard/users/+page.server.js": {
+  "src/views/system-admin-dashboard/users/+page.server.js": {
     "file": "entries/pages/system-admin-dashboard/users/_page.server.js",
     "name": "entries/pages/system-admin-dashboard/users/_page.server",
-    "src": "src/routes/system-admin-dashboard/users/+page.server.js",
+    "src": "src/views/system-admin-dashboard/users/+page.server.js",
     "isEntry": true,
     "imports": [
       "_profile.js"
     ]
   },
-  "src/routes/system-admin-dashboard/users/+page.svelte": {
+  "src/views/system-admin-dashboard/users/+page.svelte": {
     "file": "entries/pages/system-admin-dashboard/users/_page.svelte.js",
     "name": "entries/pages/system-admin-dashboard/users/_page.svelte",
-    "src": "src/routes/system-admin-dashboard/users/+page.svelte",
+    "src": "src/views/system-admin-dashboard/users/+page.svelte",
     "isEntry": true,
     "imports": [
       "_renderer.js",
       "_AppFooter.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.CCoIbssd.css"
+      "_app/immutable/assets/_page.C4FsunZY.css"
     ]
   },
-  "src/routes/teacher-dashboard/+layout.server.js": {
+  "src/views/teacher-dashboard/+layout.server.js": {
     "file": "entries/pages/teacher-dashboard/_layout.server.js",
     "name": "entries/pages/teacher-dashboard/_layout.server",
-    "src": "src/routes/teacher-dashboard/+layout.server.js",
+    "src": "src/views/teacher-dashboard/+layout.server.js",
     "isEntry": true,
     "imports": [
       "_profile.js"
     ]
   },
-  "src/routes/teacher-dashboard/+page.server.js": {
+  "src/views/teacher-dashboard/+page.server.js": {
     "file": "entries/pages/teacher-dashboard/_page.server.js",
     "name": "entries/pages/teacher-dashboard/_page.server",
-    "src": "src/routes/teacher-dashboard/+page.server.js",
+    "src": "src/views/teacher-dashboard/+page.server.js",
     "isEntry": true
   },
-  "src/routes/teacher-dashboard/+page.svelte": {
+  "src/views/teacher-dashboard/+page.svelte": {
     "file": "entries/pages/teacher-dashboard/_page.svelte.js",
     "name": "entries/pages/teacher-dashboard/_page.svelte",
-    "src": "src/routes/teacher-dashboard/+page.svelte",
+    "src": "src/views/teacher-dashboard/+page.svelte",
     "isEntry": true,
     "imports": [
       "_renderer.js",
@@ -479,7 +482,7 @@
       "_AppFooter.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.BGWIKlIz.css"
+      "_app/immutable/assets/_page.BirQouyG.css"
     ]
   }
 }
